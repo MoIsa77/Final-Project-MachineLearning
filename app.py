@@ -143,6 +143,26 @@ if uploaded_file is not None:
                     name="exp",
                     exist_ok=True
                 )
+                 # 👇 [BARU] Hitung waktu selesai dan durasi
+                end_time = time.time()
+                processing_time = end_time - start_time
+
+                # 👇 [BARU] Hitung rata-rata akurasi (confidence score)
+                conf_scores = results[0].boxes.conf.cpu().numpy()
+                avg_confidence = np.mean(conf_scores) if len(conf_scores) > 0 else 0
+
+                interpretasi, total = interpret_boulder_detection(results)
+                st.session_state["interpretasi"] = interpretasi
+                st.session_state["result_image_path"] = os.path.join("runs", "segment", "exp", os.path.basename(tmp_path))
+                
+                # 👇 [BARU] Simpan statistik ke session_state
+                st.session_state["stats"] = {
+                    "time": processing_time,
+                    "confidence": avg_confidence
+                }
+
+                os.remove(tmp_path)
+                st.rerun()
                 
                 interpretasi, total = interpret_boulder_detection(results)
                 st.session_state["interpretasi"] = interpretasi

@@ -10,11 +10,11 @@ import shutil
 
 # Page config
 st.set_page_config(
-    page_title="Deteksi Clinker Particle", page_icon="🪨", layout="centered"
+    page_title="DETEKSI CLINKER", page_icon="🪨", layout="centered"
 )
 
 # Title and description
-st.title("🪨 Deteksi Clinker Particle")
+st.title("🪨 DETEKSI CLINKER")
 st.markdown(
     "Upload gambar untuk melakukan segmentasi partikel clinker menggunakan model YOLOv8."
 )

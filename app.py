@@ -143,44 +143,6 @@ if uploaded_file is not None:
                     name="exp",
                     exist_ok=True
                 )
-                (
-                 # 👇 [BARU] Hitung waktu selesai dan durasi
-                end_time = time.time()
-                processing_time = end_time - start_time
-
-                # 👇 [BARU] Hitung rata-rata akurasi (confidence score)
-                conf_scores = results[0].boxes.conf.cpu().numpy()
-                avg_confidence = np.mean(conf_scores) if len(conf_scores) > 0 else 0
-
-                interpretasi, total = interpret_boulder_detection(results)
-                st.session_state["interpretasi"] = interpretasi
-                st.session_state["result_image_path"] = os.path.join("runs", "segment", "exp", os.path.basename(tmp_path))
-                
-                # 👇 [BARU] Simpan statistik ke session_state
-                st.session_state["stats"] = {
-                    "time": processing_time,
-                    "confidence": avg_confidence
-                }
-
-                os.remove(tmp_path)
-                st.rerun()
-                
-                interpretasi, total = interpret_boulder_detection(results)
-                st.session_state["interpretasi"] = interpretasi
-                st.session_state["result_image_path"] = os.path.join("runs", "segment", "exp", os.path.basename(tmp_path))
-
-                # result_image_path = os.path.join("runs", "segment", "exp", os.path.basename(tmp_path))
-                # if os.path.exists(result_image_path):
-                #     result_image = cv2.imread(result_image_path)
-                #     result_image = cv2.cvtColor(result_image, cv2.COLOR_BGR2RGB)
-                #     st.markdown("### ✅ Hasil Segmentasi:")
-                #     st.image(result_image, caption="Hasil Segmentasi YOLOv8", use_container_width=True)
-                # else:
-                #     st.warning("❗ Gagal menemukan hasil segmentasi di direktori `runs/segment/exp`.")
-
-                os.remove(tmp_path)
-                st.rerun()
-                )
     with col2:
         if st.button("Clear"):
             keys_to_clear = ["uploaded_file", "interpretasi", "result_image_path"]

@@ -142,7 +142,7 @@ if uploaded_file is not None:
                     project="runs/segment",
                     name="exp",
                     exist_ok=True
-                )
+                
                  # 👇 [BARU] Hitung waktu selesai dan durasi
                 end_time = time.time()
                 processing_time = end_time - start_time
@@ -179,7 +179,7 @@ if uploaded_file is not None:
 
                 os.remove(tmp_path)
                 st.rerun()
-
+                )
     with col2:
         if st.button("Clear"):
             keys_to_clear = ["uploaded_file", "interpretasi", "result_image_path"]

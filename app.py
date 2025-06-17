@@ -142,7 +142,8 @@ if uploaded_file is not None:
                     project="runs/segment",
                     name="exp",
                     exist_ok=True
-                
+                )
+                (
                  # 👇 [BARU] Hitung waktu selesai dan durasi
                 end_time = time.time()
                 processing_time = end_time - start_time
